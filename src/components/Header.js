@@ -1,16 +1,30 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const Header = (props) => (
-  <div className="header">
-    <div className="container">
-      <h1 className="header__title">{props.title}</h1>
-      {props.subtitle && <h2 className="header__subtitle">{props.subtitle}</h2>}
-    </div>
-  </div>
+const Header = () => (
+  <header>
+    <h1>Expensify</h1>
+    <NavLink
+      to="/"
+      activeClassName="is-active"
+      exact={true}
+    >Dashboard</NavLink>
+    <NavLink
+      to="/create"
+      activeClassName="is-active"
+      exact={true}
+    >Create expense</NavLink>
+    <NavLink
+      to="/edit"
+      activeClassName="is-active"
+      exact={true}
+    >Edit expense</NavLink>
+    <NavLink
+      to="/help"
+      activeClassName="is-active"
+      exact={true}
+    >Help</NavLink>
+  </header>
 )
-
-Header.defaultProps = {
-  title: 'Default title'
-}
 
 export default Header
