@@ -13,12 +13,12 @@ import getExpenses from './selectors/expenses'
 
 const store = configureStore()
 
-store.dispatch(addExpense({ description: 'Gas bill', amount: 500, createdAt: 14000 }))
-store.dispatch(addExpense({ description: 'Water bill', amount: 300, createdAt: 1598868025075 }))
-store.dispatch(addExpense({ description: 'Rent', amount: 10000, createdAt: 10000 }))
+// store.dispatch(addExpense({ description: 'Gas bill', amount: 500, createdAt: 14000 }))
+// store.dispatch(addExpense({ description: 'Water bill', amount: 300, createdAt: 1598868025075 }))
+// store.dispatch(addExpense({ description: 'Rent', amount: 10000, createdAt: 10000 }))
 // store.dispatch(setTextFilter('water'))
 
-console.log(getExpenses(store.getState().expenses, store.getState().filters))
+// console.log(getExpenses(store.getState().expenses, store.getState().filters))
 
 const jsx = (
   <Provider store={store}>
