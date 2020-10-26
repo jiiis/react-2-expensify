@@ -1,6 +1,5 @@
 import React from 'react'
 import { SingleDatePicker } from 'react-dates'
-import 'react-dates/lib/css/_datepicker.css'
 import moment from 'moment'
 
 export default class ExpenseForm extends React.Component {
@@ -16,6 +15,7 @@ export default class ExpenseForm extends React.Component {
       error: ''
     }
   }
+
   onDescriptionChange = (e) => {
     const description = e.target.value
 
@@ -28,15 +28,15 @@ export default class ExpenseForm extends React.Component {
       this.setState(() => ({ amount }))
     }
   }
-  onDateChange = (createdAt) => {
-    if (createdAt) {
-      this.setState(() => ({ createdAt }))
-    }
-  }
   onNoteChange = (e) => {
     const note = e.target.value
 
     this.setState(() => ({ note }))
+  }
+  onDateChange = (createdAt) => {
+    if (createdAt) {
+      this.setState(() => ({ createdAt }))
+    }
   }
   onDateFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }))
@@ -52,8 +52,8 @@ export default class ExpenseForm extends React.Component {
     this.props.onSubmit({
       description: this.state.description,
       amount: parseFloat(this.state.amount) * 100,
-      createdAt: this.state.createdAt.valueOf(),
-      note: this.state.note
+      note: this.state.note,
+      createdAt: this.state.createdAt.valueOf()
     })
   }
 
