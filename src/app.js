@@ -4,22 +4,14 @@ import { Provider } from 'react-redux'
 import 'normalize.css/normalize.css'
 import 'react-dates/lib/css/_datepicker.css'
 
-import './firebase/firebase'
+import { firebase } from './firebase/firebase'
 import configureStore from './store/configureStore'
 import './styles/styles.scss'
-import AppRouter from './routers/AppRouter'
-import { addExpense, startSetExpenses } from './actions/expenses'
-import { setTextFilter } from './actions/filters'
-import getExpenses from './selectors/expenses'
+import AppRouter, { history } from './routers/AppRouter'
+import { startSetExpenses } from './actions/expenses'
+import { login, logout } from './actions/auth'
 
 const store = configureStore()
-
-// store.dispatch(addExpense({ description: 'Gas bill', amount: 500, createdAt: 14000 }))
-// store.dispatch(addExpense({ description: 'Water bill', amount: 300, createdAt: 1598868025075 }))
-// store.dispatch(addExpense({ description: 'Rent', amount: 10000, createdAt: 10000 }))
-// store.dispatch(setTextFilter('water'))
-
-// console.log(getExpenses(store.getState().expenses, store.getState().filters))
 
 const jsx = (
   <Provider store={store}>
@@ -27,8 +19,32 @@ const jsx = (
   </Provider>
 )
 
+let isRendered = false
+
+const renderApp = () => {
+  if (!isRendered) {
+    ReactDOM.render(jsx, document.getElementById('app'))
+    isRendered = true
+  }
+}
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById('app'))
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch(login(user.uid))
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp()
+
+      if (history.location.pathname === '/') {
+        history.push('/dashboard')
+      }
+    })
+  } else {
+    store.dispatch(logout())
+
+    renderApp()
+
+    history.push('/')
+  }
 })

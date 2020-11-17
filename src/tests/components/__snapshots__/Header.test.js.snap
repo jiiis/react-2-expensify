@@ -9,7 +9,7 @@ exports[`should render Header 1`] = `
     activeClassName="is-active"
     aria-current="page"
     exact={true}
-    to="/"
+    to="/dashboard"
   >
     Dashboard
   </NavLink>
@@ -37,5 +37,10 @@ exports[`should render Header 1`] = `
   >
     Help
   </NavLink>
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
 </header>
 `;
