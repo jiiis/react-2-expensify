@@ -1,8 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 62.5%;
 }
 
 body {
+  line-height: 1.6;
+  color: $dark-gray;
   font-family: Helvetica, Arial, sans-serif;
   font-size: $m-size;
 }
